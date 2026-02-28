@@ -46,6 +46,10 @@ export class KittyStateMachine {
     }
 
     transition(to: State, username: string): boolean {
+        if (this._state === "DEAD") {
+            return false;
+        }
+
         if (this._activeTimeout !== undefined) {
             clearTimeout(this._activeTimeout);
             this._activeTimeout = undefined;
