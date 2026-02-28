@@ -56,8 +56,10 @@ export class KittyStateMachine {
         if (to === "SLEEPING") {
             this.lastTimeSlept = new Date();
         }
-
-        this.recordEvent(to, username);
+        
+        if (username !== "SYSTEM") {
+            this.recordEvent(to, username);
+        }
 
         const entry = TRANSITION_TABLE[to];
         const silent = entry.autoTransition?.silent ?? false;
